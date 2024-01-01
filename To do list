@@ -1,0 +1,58 @@
+import os
+
+def clear_screen():
+    os.system('cls' if os.name == 'nt' else 'clear')
+
+def show_menu():
+    print("To-Do List Menu:")
+    print("1. View Tasks")
+    print("2. Add Task")
+    print("3. Mark Task as Done")
+    print("4. Quit")
+
+def view_tasks(tasks):
+    if not tasks:
+        print("No tasks yet.")
+    else:
+        for index, task in enumerate(tasks, start=1):
+            print(f"{index}. {task}")
+
+def add_task(tasks, new_task):
+    tasks.append(new_task)
+    print("Task added successfully.")
+
+def mark_as_done(tasks, task_index):
+    if 1 <= task_index <= len(tasks):
+        del tasks[task_index - 1]
+        print("Task marked as done.")
+    else:
+        print("Invalid task index.")
+
+def main():
+    tasks = []
+
+    while True:
+        clear_screen()
+        show_menu()
+
+        choice = input("Enter your choice (1-4): ")
+
+        if choice == '1':
+            view_tasks(tasks)
+        elif choice == '2':
+            new_task = input("Enter the task: ")
+            add_task(tasks, new_task)
+        elif choice == '3':
+            view_tasks(tasks)
+            task_index = int(input("Enter the task number to mark as done: "))
+            mark_as_done(tasks, task_index)
+        elif choice == '4':
+            print("Goodbye!")
+            break
+        else:
+            print("Invalid choice. Please enter a number between 1 and 4.")
+
+        input("\nPress Enter to continue...")
+
+if _name_ == "_main_":
+    main()
